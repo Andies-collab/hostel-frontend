@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": "https://Andies-collab.github.io/hostel-frontend",
 
+
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
