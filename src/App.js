@@ -1,22 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    fetch("https://hostel-management-teal.vercel.app/api/rooms") // Replace with your backend URL
+      .then(response => response.json())
+      .then(data => setRooms(data))
+      .catch(error => console.error("Error fetching rooms:", error));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Room Management System 🏠</h1>
+        <ul>
+          {rooms.length > 0 ? (
+            rooms.map(room => (
+              <li key={room.id}>
+                Room {room.room_number} - {room.availability} - ${room.price}
+              </li>
+            ))
+          ) : (
+            <p>Loading rooms...</p>
+          )}
+        </ul>
       </header>
     </div>
   );
